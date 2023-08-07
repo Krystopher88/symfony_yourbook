@@ -34,7 +34,7 @@ class Livre
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Editeur $editeur= null;
+    private ?Editeur $editeur = null;
 
     #[ORM\ManyToMany(targetEntity: Genre::class)]
     private Collection $genres;
@@ -42,6 +42,11 @@ class Livre
     public function __construct()
     {
         $this->genres = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitre().' - '.$this->getAuteur().' - '.$this->getEditeur();
     }
 
     public function getId(): ?int
@@ -54,7 +59,7 @@ class Livre
         return $this->titre;
     }
 
-    public function setTitre(string $titre): static
+    public function setTitre(string $titre): self
     {
         $this->titre = $titre;
 
@@ -66,7 +71,7 @@ class Livre
         return $this->isbn;
     }
 
-    public function setIsbn(string $isbn): static
+    public function setIsbn(string $isbn): self
     {
         $this->isbn = $isbn;
 
@@ -78,7 +83,7 @@ class Livre
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -90,7 +95,7 @@ class Livre
         return $this->archive;
     }
 
-    public function setArchive(bool $archive): static
+    public function setArchive(bool $archive): self
     {
         $this->archive = $archive;
 
@@ -102,19 +107,19 @@ class Livre
         return $this->auteur;
     }
 
-    public function setAuteur(?Auteur $auteur): static
+    public function setAuteur(?Auteur $auteur): self
     {
         $this->auteur = $auteur;
 
         return $this;
     }
 
-    public function getEditeurId(): ?Editeur
+    public function getEditeur(): ?Editeur
     {
         return $this->editeur;
     }
 
-    public function setEditeurId(?Editeur $editeur): static
+    public function setEditeur(?Editeur $editeur): self
     {
         $this->editeur = $editeur;
 
@@ -129,7 +134,7 @@ class Livre
         return $this->genres;
     }
 
-    public function addGenre(Genre $genre): static
+    public function addGenre(Genre $genre): self
     {
         if (!$this->genres->contains($genre)) {
             $this->genres->add($genre);
@@ -138,7 +143,7 @@ class Livre
         return $this;
     }
 
-    public function removeGenre(Genre $genre): static
+    public function removeGenre(Genre $genre): self
     {
         $this->genres->removeElement($genre);
 

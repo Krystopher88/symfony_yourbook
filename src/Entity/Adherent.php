@@ -15,6 +15,11 @@ class Adherent
     #[ORM\Column]
     private ?int $id = null;
 
+    public function __toString()
+    {
+        return $this->getId(). ' ' .$this->getNom(). ' ' .$this->getPrenom();
+    }
+
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EmpruntRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,7 +21,7 @@ class Emprunt
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Exemplaire $Exemplaire = null;
+    private ?Exemplaire $exemplaire = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_emprunt = null;
@@ -30,6 +31,8 @@ class Emprunt
 
     #[ORM\Column]
     private ?bool $status = null;
+
+    private ?\DateTimeInterface $date_previsionnelle = null;
 
     public function getId(): ?int
     {
@@ -50,12 +53,12 @@ class Emprunt
 
     public function getExemplaire(): ?Exemplaire
     {
-        return $this->Exemplaire;
+        return $this->exemplaire;
     }
 
-    public function setExemplaire(?Exemplaire $Exemplaire): static
+    public function setExemplaire(?Exemplaire $exemplaire): self
     {
-        $this->Exemplaire = $Exemplaire;
+        $this->exemplaire = $exemplaire;
 
         return $this;
     }
@@ -92,6 +95,24 @@ class Emprunt
     public function setStatus(bool $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of date_previsionnelle
+     */
+    public function getDatePrevisionnelle(): ?\DateTimeInterface
+    {
+        return $this->date_previsionnelle;
+    }
+
+    /**
+     * Set the value of date_previsionnelle
+     */
+    public function setDatePrevisionnelle(?\DateTimeInterface $date_previsionnelle): self
+    {
+        $this->date_previsionnelle = $date_previsionnelle;
 
         return $this;
     }

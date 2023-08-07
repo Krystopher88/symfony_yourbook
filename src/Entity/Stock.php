@@ -13,6 +13,11 @@ class Stock
     #[ORM\Column]
     private ?int $id = null;
 
+    public function __toString()
+    {
+        return $this->getEmplacement();
+    }
+
     #[ORM\Column(length: 255)]
     private ?string $emplacement = null;
 
