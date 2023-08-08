@@ -32,7 +32,7 @@ class Emprunt
     #[ORM\Column]
     private ?bool $status = null;
 
-    private ?\DateTimeInterface $date_previsionnelle = null;
+    // private ?\DateTimeInterface $date_previsionnelle = null;
 
     public function getId(): ?int
     {
@@ -99,21 +99,15 @@ class Emprunt
         return $this;
     }
 
-    /**
-     * Get the value of date_previsionnelle
-     */
     public function getDatePrevisionnelle(): ?\DateTimeInterface
     {
-        return $this->date_previsionnelle;
+        $datePrevisionnelle =null;
+        if($this->getDateEmprunt()){
+            $datePrevisionnelle = DateTime::createFromInterface($this->getDateEmprunt());
+        $datePrevisionnelle->modify('+20days');
+        }
+        
+        return $datePrevisionnelle;
     }
 
-    /**
-     * Set the value of date_previsionnelle
-     */
-    public function setDatePrevisionnelle(?\DateTimeInterface $date_previsionnelle): self
-    {
-        $this->date_previsionnelle = $date_previsionnelle;
-
-        return $this;
-    }
 }

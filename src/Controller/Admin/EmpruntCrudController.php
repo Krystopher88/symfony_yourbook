@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Emprunt;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -16,6 +17,7 @@ class EmpruntCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield from parent::configureFields($pageName);
+        yield DateTimeField::new('date_previsionnelle')->setDisabled(true);
         yield AssociationField::new('exemplaire');
         yield AssociationField::new('Adherent');
     }
